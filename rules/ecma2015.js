@@ -11,6 +11,7 @@ module.exports = function (usePlugin) {
           if (node.kind === 'let' || node.kind === 'const') {
             if (usePlugin('block-scoping')) {
               context.report({
+                type: node.kind,
                 node,
                 loc: { start: node.start, end: node.end },
                 message: `Using ${node.kind} is not allowed`
@@ -22,6 +23,7 @@ module.exports = function (usePlugin) {
           if (node.generator === true) {
             if (usePlugin('regenerator-transform')) {
               context.report({
+                type: 'generator',
                 node,
                 message: 'Using generator function is not allowed'
               })
@@ -32,6 +34,7 @@ module.exports = function (usePlugin) {
           if (node.type === 'ForOfStatement') {
             if (usePlugin('for-of')) {
               context.report({
+                type: 'for...of',
                 node,
                 message: 'Using for...of is not allowed'
               })
