@@ -50,6 +50,7 @@ module.exports = function (usePlugin) {
           if (node.operator === "**=" && usePlugin("exponentiation-operator")) {
             const { browsers, message } = BrowserMap["AssignmentExpression"];
             context.report({
+              type:'AssignmentExpression',
               node,
               browsers,
               message,
